@@ -1,6 +1,6 @@
-from password_manager import save_password
-from password_manager import load_password
-from password_manager import verify_password
+from passpose.backend.password_manager import save_password
+from passpose.backend.password_manager import load_password
+from passpose.backend.password_manager import verify_password
 
 
 password = [
