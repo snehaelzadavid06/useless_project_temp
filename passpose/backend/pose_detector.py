@@ -3,7 +3,7 @@ import mediapipe as mp
 
 from gesture_detector import detect_gesture
 from sequence_detector import SequenceDetector
-from password_manager import save_password
+from password_manager import save_password, verify_password
 
 # Path to the MediaPipe pose model
 MODEL_PATH = "passpose/backend/models/pose_landmarker_full.task"
@@ -24,6 +24,7 @@ landmarker = mp.tasks.vision.PoseLandmarker.create_from_options(options)
 
 sequence_detector = SequenceDetector()
 recording = False
+verifying = False
 
 # Open webcam
 camera = cv2.VideoCapture(0)
@@ -68,10 +69,10 @@ while True:
         landmarks = result.pose_landmarks[0]
         gesture = detect_gesture(landmarks)        
 
-        if recording:
-           sequence = sequence_detector.update(gesture)
+        if recording or verifying:
+            sequence = sequence_detector.update(gesture)
         else:
-           sequence = sequence_detector.sequence
+            sequence = sequence_detector.sequence
         
         cv2.putText(
         frame,
@@ -135,28 +136,68 @@ while True:
     # Handle keyboard input
     key = cv2.waitKey(1) & 0xFF
 
+    # Quit
     if key == ord("q"):
-        break
+       break
 
-    elif key == ord(" "):
+    # Create a new password
+    elif key == ord("c"):
 
-        if not recording:
+        sequence_detector.reset()
+        recording = True
+        verifying = False
 
-            # Start recording
-            sequence_detector.reset()
-            recording = True
+        print()
+        print("=== PASSWORD CREATION ===")
+        print("Perform your secret pose sequence!")
+        print("Press SPACE when finished.")
 
-            print("Recording started!")
+
+    # Finish password creation
+    elif key == ord(" ") and recording:
+        recording = False
+
+        print()
+        print("Password recording stopped.")
+        print("Password sequence:")
+        print(sequence_detector.sequence)
+
+        save_password(sequence_detector.sequence)
+
+
+    # Start password verification
+    elif key == ord("v"):
+
+        sequence_detector.reset()
+        verifying = True
+        recording = False
+
+        print()
+        print("=== PASSWORD VERIFICATION ===")
+        print("Perform your saved pose sequence!")
+        print("Press SPACE when finished.")
+
+
+     # Finish password verification
+    elif key == ord(" ") and verifying:
+
+        verifying = False
+
+        entered_sequence = sequence_detector.sequence
+
+        print()
+        print("Entered sequence:")
+        print(entered_sequence)
+
+        if verify_password(entered_sequence):
+
+            print()
+            print("ACCESS GRANTED!")
 
         else:
 
-            # Stop recording
-            recording = False
-
-            print("Recording stopped!")
-            print("Password sequence:")
-            print(sequence_detector.sequence)
-            save_password(sequence_detector.sequence)
+            print()
+            print("ACCESS DENIED!")
 
 camera.release()
 landmarker.close()
