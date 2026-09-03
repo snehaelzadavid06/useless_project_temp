@@ -13,6 +13,20 @@ def detect_arms_out(landmarks):
 
     return left_arm_out and right_arm_out
 
+def detect_hands_together(landmarks):
+
+    left_wrist = landmarks[15]
+    right_wrist = landmarks[16]
+
+    dx = left_wrist.x - right_wrist.x
+    dy = left_wrist.y - right_wrist.y
+
+    distance = (dx ** 2 + dy ** 2) ** 0.5
+
+    threshold = 0.15
+
+    return distance < threshold
+
 def detect_gesture(landmarks):
 
     left_shoulder = landmarks[11]
@@ -32,6 +46,9 @@ def detect_gesture(landmarks):
     )
 
     # Arms stretched horizontally
+    if detect_hands_together(landmarks):
+        return "HANDS_TOGETHER"
+    
     if detect_arms_out(landmarks):
         return "ARMS_OUT"
 
