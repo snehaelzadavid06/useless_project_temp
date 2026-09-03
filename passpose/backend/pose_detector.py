@@ -3,7 +3,7 @@ import mediapipe as mp
 
 from gesture_detector import detect_gesture
 from sequence_detector import SequenceDetector
-
+from password_manager import save_password
 
 # Path to the MediaPipe pose model
 MODEL_PATH = "passpose/backend/models/pose_landmarker_full.task"
@@ -156,6 +156,7 @@ while True:
             print("Recording stopped!")
             print("Password sequence:")
             print(sequence_detector.sequence)
+            save_password(sequence_detector.sequence)
 
 camera.release()
 landmarker.close()
