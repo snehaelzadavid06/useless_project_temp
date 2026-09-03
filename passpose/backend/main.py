@@ -1,11 +1,18 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from .auth_service import create_password, authenticate
 
-
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class PasswordSequence(BaseModel):
     sequence: list[str]
@@ -27,6 +34,7 @@ def health_check():
 
 @app.post("/password/create")
 def create_password_endpoint(data: PasswordSequence):
+
     success = create_password(data.sequence)
 
     if success:
@@ -40,11 +48,13 @@ def create_password_endpoint(data: PasswordSequence):
         "message": "Password sequence cannot be empty."
     }
 
-@app.post("/password/verify")
-def check_password(data: PasswordSequence):
-    result = authenticate(data.sequence)
 
-    if result:
+@app.post("/password/verify")
+def verify_password_endpoint(data: PasswordSequence):
+
+    authenticated = authenticate(data.sequence)
+
+    if authenticated:
         return {
             "authenticated": True,
             "message": "ACCESS GRANTED!"
