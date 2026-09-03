@@ -2,23 +2,24 @@
 
 
 
-# [Project Name] 🎯
+# PassPose
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Solo Kunj
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Member 1: Sneha Elza David - LBS Institute of Technology for Women
 
 ### Project Description
-[2-3 lines about what your project does]
+PassPose is a computer vision based passwordless authentication system where your body becomes your password. Instead of typing a password, users create and save a unique sequence of poses and authenticate by performing that sequence in front of a webcam.
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Traditional authentication relies heavily on text-based passwords. This creates several problems:
+- Simple passwords are easy to guess (hackers will hack it easily)
+- Complex passwords are secure but hard to remember
+- users often reuse passwords across multiple platforms
 
 ### The Solution (that nobody asked for)
 [How are you solving it? Keep it fun!]
