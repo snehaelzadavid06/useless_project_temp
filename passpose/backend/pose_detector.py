@@ -1,7 +1,8 @@
 import cv2
 import mediapipe as mp
-from gesture_detector import detect_gesture
 
+from gesture_detector import detect_gesture
+from sequence_detector import SequenceDetector
 # Path to the MediaPipe pose model
 MODEL_PATH = "passpose/backend/models/pose_landmarker_full.task"
 
@@ -19,6 +20,8 @@ options = mp.tasks.vision.PoseLandmarkerOptions(
 
 landmarker = mp.tasks.vision.PoseLandmarker.create_from_options(options)
 
+sequence_detector = SequenceDetector()
+recording = False
 
 # Open webcam
 camera = cv2.VideoCapture(0)
@@ -63,12 +66,27 @@ while True:
         landmarks = result.pose_landmarks[0]
         gesture = detect_gesture(landmarks)
 
+        if recording:
+           sequence = sequence_detector.update(gesture)
+        else:
+           sequence = sequence_detector.sequence
+        
         cv2.putText(
         frame,
         f"Gesture: {gesture}",
         (20, 80),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.8,
+        (255, 255, 255),
+        2
+        )
+        
+        cv2.putText(
+        frame,
+        f"Sequence: {' -> '.join(sequence)}",
+        (20, 120),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.6,
         (255, 255, 255),
         2
         )
@@ -112,11 +130,30 @@ while True:
         )
 
     cv2.imshow("PassPose - Pose Detection", frame)
+    # Handle keyboard input
+    key = cv2.waitKey(1) & 0xFF
 
-    # Press Q to quit
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+    if key == ord("q"):
         break
 
+    elif key == ord(" "):
+
+        if not recording:
+
+            # Start recording
+            sequence_detector.reset()
+            recording = True
+
+            print("Recording started!")
+
+        else:
+
+            # Stop recording
+            recording = False
+
+            print("Recording stopped!")
+            print("Password sequence:")
+            print(sequence_detector.sequence)
 
 camera.release()
 landmarker.close()
