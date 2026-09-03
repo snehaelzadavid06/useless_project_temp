@@ -22,7 +22,10 @@ Traditional authentication relies heavily on text-based passwords. This creates 
 - users often reuse passwords across multiple platforms
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+PassPose replaces traditional text passwords with a randomly generated sequence of body gestures. Users create and save their own pose sequence and whenever they want to login, they simply perform the same sequence in front of the webcam.
+- no typing
+- no memorizing complicated characters
+- just stand infront of the camera and do your secret little dance :)
 
 ## Technical Details
 ### Technologies/Components Used
@@ -32,10 +35,6 @@ For Software:
 - [Libraries used]
 - [Tools used]
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
 
 ### Implementation
 For Software:
@@ -62,24 +61,6 @@ For Software:
 ![Workflow](Add your workflow/architecture diagram here)
 *Add caption explaining your workflow*
 
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
@@ -90,9 +71,8 @@ For Hardware:
 [Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Sneha Elza David: made the entire thing with the help of my ai buddies:)
+
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
