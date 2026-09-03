@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from .password_manager import save_password, verify_password
+from .auth_service import create_password, authenticate
 
 
 app = FastAPI()
@@ -26,19 +26,23 @@ def health_check():
 
 
 @app.post("/password/create")
-def create_password(data: PasswordSequence):
+def create_password_endpoint(data: PasswordSequence):
+    success = create_password(data.sequence)
 
-    save_password(data.sequence)
+    if success:
+        return {
+            "success": True,
+            "message": "Password created successfully!"
+        }
 
     return {
-        "message": "Password created successfully!"
+        "success": False,
+        "message": "Password sequence cannot be empty."
     }
-
 
 @app.post("/password/verify")
 def check_password(data: PasswordSequence):
-
-    result = verify_password(data.sequence)
+    result = authenticate(data.sequence)
 
     if result:
         return {
