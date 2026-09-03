@@ -23,7 +23,7 @@ def detect_hands_together(landmarks):
 
     distance = (dx ** 2 + dy ** 2) ** 0.5
 
-    threshold = 0.15
+    threshold = 0.25
 
     return distance < threshold
 def detect_squat(landmarks):
@@ -61,7 +61,7 @@ def detect_gesture(landmarks):
     right_hand_up = (
         right_wrist.y < right_shoulder.y - margin
     )
-    
+   
     #squats checking
     if detect_squat(landmarks):
        return "SQUAT"

@@ -3,6 +3,8 @@ import mediapipe as mp
 
 from gesture_detector import detect_gesture
 from sequence_detector import SequenceDetector
+
+
 # Path to the MediaPipe pose model
 MODEL_PATH = "passpose/backend/models/pose_landmarker_full.task"
 
@@ -64,7 +66,7 @@ while True:
     if result.pose_landmarks:
 
         landmarks = result.pose_landmarks[0]
-        gesture = detect_gesture(landmarks)
+        gesture = detect_gesture(landmarks)        
 
         if recording:
            sequence = sequence_detector.update(gesture)

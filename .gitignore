@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .env
 passpose/backend/models/
+passpose/backend/password.json
