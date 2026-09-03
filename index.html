@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PassPose</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 20px;
+            margin-bottom: 35px;
+            color: #666;
+        }
+
+        .camera-box {
+            width: 100%;
+            height: 400px;
+            background: #222;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .sequence {
+            min-height: 50px;
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #createBtn {
+            background: #222;
+            color: white;
+        }
+
+        #verifyBtn {
+            background: #ddd;
+            color: #222;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #status {
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>PassPose</h1>
+
+        <p class="tagline">
+            Your body is the password.
+        </p>
+
+        <div class="camera-box">
+            Webcam will appear here
+        </div>
+
+        <div class="sequence">
+            Pose sequence will appear here
+        </div>
+
+        <div class="buttons">
+
+            <button id="createBtn">
+                Create Password
+            </button>
+
+            <button id="verifyBtn">
+                Verify Identity
+            </button>
+
+        </div>
+
+        <div id="status">
+            Ready.
+        </div>
+
+    </div>
+
+</body>
+
+</html>
