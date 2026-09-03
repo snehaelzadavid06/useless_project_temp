@@ -26,6 +26,23 @@ def detect_hands_together(landmarks):
     threshold = 0.15
 
     return distance < threshold
+def detect_squat(landmarks):
+
+    left_hip = landmarks[23]
+    right_hip = landmarks[24]
+
+    left_knee = landmarks[25]
+    right_knee = landmarks[26]
+
+    left_difference = left_knee.y - left_hip.y
+    right_difference = right_knee.y - right_hip.y
+
+    threshold = 0.25
+
+    left_squat = left_difference < threshold
+    right_squat = right_difference < threshold
+
+    return left_squat and right_squat
 
 def detect_gesture(landmarks):
 
@@ -44,11 +61,16 @@ def detect_gesture(landmarks):
     right_hand_up = (
         right_wrist.y < right_shoulder.y - margin
     )
-
-    # Arms stretched horizontally
+    
+    #squats checking
+    if detect_squat(landmarks):
+       return "SQUAT"
+    
+    #hands together
     if detect_hands_together(landmarks):
         return "HANDS_TOGETHER"
     
+    # Arms stretched horizontally
     if detect_arms_out(landmarks):
         return "ARMS_OUT"
 
