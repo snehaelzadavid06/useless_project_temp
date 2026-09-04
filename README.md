@@ -592,12 +592,6 @@ An incorrect sequence returns an access-denied response.
 
 ---
 
-### 4. Demo Page
-
-![PassPose Demo Page](screenshots/demo.png)
-
-*The protected demo page displayed after successful authentication.*
-
 > Replace the screenshot paths above with the actual locations of your screenshots if they are stored somewhere else.
 
 ---
