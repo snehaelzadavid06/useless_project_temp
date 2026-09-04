@@ -570,7 +570,7 @@ An incorrect sequence returns an access-denied response.
 
 ### 1. Landing Page
 
-![PassPose Landing Page](screenshots/landing.png)
+![PassPose Landing Page](landing.png)
 
 *The PassPose landing page where users can choose between Login and Sign Up.*
 
@@ -578,7 +578,7 @@ An incorrect sequence returns an access-denied response.
 
 ### 2. Sign Up Page
 
-![PassPose Sign Up Page](screenshots/signup.png)
+![PassPose Sign Up Page](sign_up.png)
 
 *The Sign Up page where users enter their email and create their secret gesture password using the webcam.*
 
@@ -586,7 +586,7 @@ An incorrect sequence returns an access-denied response.
 
 ### 3. Login Page
 
-![PassPose Login Page](screenshots/login.png)
+![PassPose Login Page](login.png)
 
 *The Login page where users enter their email and perform their previously created gesture password.*
 
